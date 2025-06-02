@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "VPCCidrBlock",
+    "ParameterValue": "10.200.123.0/24"
+  },
+  {
+    "ParameterKey": "PublicSubnetCidr",
+    "ParameterValue": "10.200.123.0/25"
+  },
+  {
+    "ParameterKey": "PrivateSubnetCidr",
+    "ParameterValue": "10.200.123.128/25"
+  },
+  {
+    "ParameterKey": "AvailabilityZone",
+    "ParameterValue": "us-east-1a"
+  }
+]

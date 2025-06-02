@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# === CONFIGURABLE VARIABLES ===
+STACK_NAME="NetBootVPC"
+TEMPLATE_FILE="template.yaml" # Change if your file is named differently
+REGION="us-east-1"
+AZ="us-east-1a"
+
+# === PARAMETER VALUES ===
+VPC_CIDR="10.200.123.0/24"
+PUBLIC_SUBNET_CIDR="10.200.123.0/25"
+PRIVATE_SUBNET_CIDR="10.200.123.128/25"
+
+# === DEPLOY CFN STACK ===
+echo "Deploying CloudFormation stack: $STACK_NAME"
+aws cloudformation deploy \
+  --stack-name "$STACK_NAME" \
+  --template-file "$TEMPLATE_FILE" \
+  --region "$REGION" \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides \
+    VPCCidrBlock="$VPC_CIDR" \
+    PublicSubnetCidr="$PUBLIC_SUBNET_CIDR" \
+    PrivateSubnetCidr="$PRIVATE_SUBNET_CIDR" \
+    AvailabilityZone="$AZ"
+
+# === CHECK RESULT ===
+if [ $? -eq 0 ]; then
+  echo "✅ Stack $STACK_NAME deployed successfully."
+else
+  echo "❌ Failed to deploy stack $STACK_NAME."
+fi
